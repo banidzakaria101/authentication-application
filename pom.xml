@@ -11,8 +11,8 @@
 	<groupId>com.example</groupId>
 	<artifactId>autentication-application</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>autentication-application</name>
-	<description>Autentication Application Back End</description>
+	<name>authentication-application</name>
+	<description>Authentication Application Back End</description>
 	<url/>
 	<licenses>
 		<license/>
