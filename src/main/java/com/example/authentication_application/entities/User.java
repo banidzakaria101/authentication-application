@@ -1,4 +1,4 @@
-package com.example.autentication_application.entities;
+package com.example.authentication_application.entities;
 
 
 import jakarta.persistence.*;

@@ -1,7 +1,6 @@
-package com.example.autentication_application.configs;
+package com.example.authentication_application.configs;
 
-import com.example.autentication_application.services.JwtService;
-import com.fasterxml.jackson.core.sym.CharsToNameCanonicalizer;
+import com.example.authentication_application.services.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

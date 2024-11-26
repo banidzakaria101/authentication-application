@@ -1,6 +1,6 @@
-package com.example.autentication_application.configs;
+package com.example.authentication_application.configs;
 
-import com.example.autentication_application.repositories.UserRepository;
+import com.example.authentication_application.repositories.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
