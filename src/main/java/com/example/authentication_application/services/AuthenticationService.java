@@ -1,0 +1,34 @@
+package com.example.authentication_application.services;
+
+import com.example.authentication_application.dtos.RegisterUserDto;
+import com.example.authentication_application.entities.User;
+import com.example.authentication_application.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+@Service
+public class AuthenticationService {
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public User register(RegisterUserDto register) {
+        User user = new User();
+
+        user.setUserName(register.getFullName());
+        user.setEmail(register.getEmail());
+        user.setPassword(passwordEncoder.encode(register.getPassword()));
+
+        return  userRepository.save(user);
+    }
+
+    
+}
