@@ -1,10 +1,12 @@
 package com.example.authentication_application.services;
 
+import com.example.authentication_application.dtos.LoginUserDto;
 import com.example.authentication_application.dtos.RegisterUserDto;
 import com.example.authentication_application.entities.User;
 import com.example.authentication_application.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +32,13 @@ public class AuthenticationService {
         return  userRepository.save(user);
     }
 
-    
+    public User login(LoginUserDto login) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        login.getEmail(),
+                        login.getPassword()
+                )
+        );
+        return  userRepository.findByEmail(login.getEmail()).orElseThrow();
+    }
 }
