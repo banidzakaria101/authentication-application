@@ -36,13 +36,16 @@ public class AuthenticationController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginUserDto login) {
+        System.out.println("Login attempt with: " + login.getEmail() + " and " + login.getPassword()); // Log the login data
         try{
             User authenticatedUser = authenticationService.login(login);
             String jwtToken = jwtService.generateToken(authenticatedUser);
             LoginResponse loginResponse = new LoginResponse();
             loginResponse.setToken(jwtToken);
             loginResponse.setExpiresIn(jwtService.getExpirationTime());
+            loginResponse.setUserName(authenticatedUser.getUsername());
 
+            System.out.println("username = " + loginResponse.getUserName());
             return  ResponseEntity.ok(loginResponse);
         } catch (UsernameNotFoundException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An error occurred while attempting to login");

@@ -39,6 +39,8 @@ public class AuthenticationService {
                         login.getPassword()
                 )
         );
-        return  userRepository.findByEmail(login.getEmail()).orElseThrow();
+        User user = userRepository.findByEmail(login.getEmail()).orElseThrow();
+        System.out.println("Authenticated user: " + user.getUsername());
+        return  user;
     }
 }

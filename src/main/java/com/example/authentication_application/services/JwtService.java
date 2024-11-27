@@ -33,8 +33,7 @@ public class JwtService {
     }
 
     private Claims extractAllClaims(String token) {
-        return Jwts
-                .parserBuilder()
+        return Jwts.parserBuilder()
                 .setSigningKey(getSignInKey())
                 .build()
                 .parseClaimsJws(token)
@@ -50,32 +49,21 @@ public class JwtService {
         return generateToken(new HashMap<>(), userDetails);
     }
 
-    public String generateToken(Map<String, Object> extractClaims, UserDetails userDetails) {
-        return buildToken(extractClaims, userDetails, jwtExpiration);
-    }
-
-    public long getExpirationTime() {
-        return jwtExpiration;
-    }
-
-    public String buildToken(
-            Map<String, Object> extractClaims,
-            UserDetails userDetails,
-            long expiration
-    ) {
-        return Jwts
-                .builder()
-                .setClaims(extractClaims)
+    public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+        System.out.println("Generating token for username: " + userDetails.getUsername());
+        extraClaims.put("sub", userDetails.getUsername());
+        return Jwts.builder()
+                .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + expiration))
+                .setExpiration(new Date(System.currentTimeMillis() + jwtExpiration))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUserName(token);
-        return (username.equals(userDetails.getUsername())) &&  !isTokenExpired(token);
+        return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
 
     private boolean isTokenExpired(String token) {
@@ -84,5 +72,9 @@ public class JwtService {
 
     private Date extractExpiration(String token) {
         return extractClaims(token, Claims::getExpiration);
+    }
+
+    public long getExpirationTime() {
+        return jwtExpiration;
     }
 }
