@@ -1,17 +1,27 @@
-<div class="login-container">
-    <h2>Login</h2>
-    <form (ngSubmit)="onLogin()">
-      <mat-form-field appearance="fill">
-        <mat-label>Username</mat-label>
-        <input matInput [(ngModel)]="loginData.username" name="username" required />
-      </mat-form-field>
-  
-      <mat-form-field appearance="fill">
-        <mat-label>Password</mat-label>
-        <input matInput type="password" [(ngModel)]="loginData.password" name="password" required />
-      </mat-form-field>
-  
-      <button mat-raised-button color="primary" type="submit">Login</button>
+<div class="materialContainer">
+  <div class="box">
+    <div class="title">LOGIN</div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <div class="input">
+        <label for="name">Username</label>
+        <input type="text" formControlName="email" id="name" required />
+        <span class="spin"></span>
+      </div>
+
+      <div class="input">
+        <label for="pass">Password</label>
+        <input type="password" formControlName="password" id="pass" required />
+        <span class="spin"></span>
+      </div>
+
+      <div class="button login">
+        <button type="submit"><span>GO</span> <i class="fa fa-check"></i></button>
+      </div>
+
+      <a href="" class="pass-forgot">Forgot your password?</a>
     </form>
+
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
   </div>
-  
+</div>
