@@ -1,0 +1,22 @@
+.welcome-container {
+    background-image: url('../../assets/images/2807611.jpg');
+    background-size: cover; 
+    background-position: center;
+    height: 100vh; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    position: relative; 
+    color: white; 
+  }
+  
+  .welcome-message {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 60px;
+    border-radius: 10px; 
+    text-align: center; 
+  }
+  
+  h1, h2 {
+    margin: 10px 0; 
+  }

@@ -1,0 +1,54 @@
+<div class="cont" [class.s--signup]="false">
+    <div class="form sign-in">
+      <h2>Welcome</h2>
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <label>
+          <span>Email</span>
+          <input type="email" formControlName="email" />
+        </label>
+        <label>
+          <span>Password</span>
+          <input type="password" formControlName="password" />
+        </label>
+        <p class="forgot-pass">Forgot password?</p>
+        <button type="submit" class="submit" [disabled]="loginForm.invalid">Sign In</button>
+        <p *ngIf="errorMessage" class="error-message">{{errorMessage}}</p>
+      </form>
+    </div>
+    
+    <div class="sub-cont">
+      <div class="img">
+        <div class="img__text m--up">
+          <h3>Don't have an account? Please Sign up!</h3>
+        </div>
+        <div class="img__text m--in">
+          <h3>If you already have an account, just sign in.</h3>
+        </div>
+        <div class="img__btn" (click)="toggleSignup()">
+          <span class="m--up">Sign Up</span>
+          <span class="m--in">Sign In</span>
+        </div>
+      </div>
+      
+      <div class="form sign-up">
+        <h2>Create your Account</h2>
+        <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
+          <label>
+            <span>Name</span>
+            <input type="text" formControlName="userName" />
+          </label>
+          <label>
+            <span>Email</span>
+            <input type="email" formControlName="email" />
+          </label>
+          <label>
+            <span>Password</span>
+            <input type="password" formControlName="password" />
+          </label>
+          <button type="submit" class="submit" [disabled]="signupForm.invalid">Sign Up</button>
+          <p *ngIf="errorMessage" class="error-message">{{errorMessage}}</p>
+          <p *ngIf="successMessage" class="success-message">{{successMessage}}</p>
+        </form>
+      </div>
+    </div>
+  </div>
